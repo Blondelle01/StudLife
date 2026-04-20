@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Statistiques</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0f172a; /* ✔ MÊME FOND QUE DATA.HTML */
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+/* TITRE */
+h2 {
+  margin-bottom: 20px;
+}
+
+/* TABLE IDENTIQUE À DATA.HTML */
+table {
+  margin: auto;
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 10px;
+}
+
+th {
+  background: rgba(255,255,255,0.1);
+}
+
+/* GRAPHIQUE */
+canvas {
+  margin-top: 30px;
+  background: white;
+  border-radius: 10px;
+}
+
+/* LINK */
+a {
+  color: white;
+  display: block;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h2> Statistiques des étudiants</h2>
+
+<!-- TABLE STYLE DATA.HTML -->
+<table>
+<thead>
+<tr>
+<th>Indicateur</th>
+<th>Valeur</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Âge moyen</td>
+<td id="age">0</td>
+</tr>
+
+<tr>
+<td>Heures moyennes</td>
+<td id="hours">0</td>
+</tr>
+
+<tr>
+<td>Hommes</td>
+<td id="men">0</td>
+</tr>
+
+<tr>
+<td>Femmes</td>
+<td id="women">0</td>
+</tr>
+
+<tr>
+<td>Internet Oui</td>
+<td id="net">0</td>
+</tr>
+</tbody>
+</table>
+
+<!-- GRAPHIQUE -->
+<canvas id="chart" width="400" height="250"></canvas>
+
+<a href="index.html">⬅ Retour</a>
+
+<script>
+
+function stats(){
+  let data = JSON.parse(localStorage.getItem("etudiants")) || [];
+
+  if(data.length === 0) return;
+
+  let age = 0, hours = 0, m = 0, f = 0, net = 0;
+
+  data.forEach(e => {
+    age += Number(e.age);
+    hours += Number(e.heures);
+
+    if(e.sexe === "Homme") m++;
+    if(e.sexe === "Femme") f++;
+    if(e.internet === "Oui") net++;
+  });
+
+  // TABLE
+  document.getElementById("age").innerText = (age / data.length).toFixed(1);
+  document.getElementById("hours").innerText = (hours / data.length).toFixed(1);
+  document.getElementById("men").innerText = m;
+  document.getElementById("women").innerText = f;
+  document.getElementById("net").innerText = net;
+
+  // GRAPH
+  new Chart(document.getElementById("chart"), {
+    type: "bar",
+    data: {
+      labels: ["Hommes", "Femmes", "Internet Oui"],
+      datasets: [{
+        label: "Répartition",
+        data: [m, f, net],
+        backgroundColor: ["#3b82f6", "#ec4899", "#22c55e"]
+      }]
+    }
+  });
+}
+
+window.onload = stats;
+
+</script>
+
+</body>
+</html>

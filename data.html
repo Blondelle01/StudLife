@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Données</title>
+
+<style>
+body {
+  background: #0f172a;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+  padding: 30px;
+}
+
+table {
+  margin: auto;
+  width: 90%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 10px;
+}
+
+th {
+  background: rgba(255,255,255,0.1);
+}
+
+a {
+  color: white;
+  display:block;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Données des étudiants</h2>
+
+<table>
+<thead>
+<tr>
+<th>Sexe</th>
+<th>Âge</th>
+<th>Filière</th>
+<th>Heures</th>
+<th>Internet</th>
+</tr>
+</thead>
+
+<tbody id="tbody"></tbody>
+</table>
+
+<a href="index.html">⬅ Retour</a>
+
+<script>
+
+function afficher(){
+  let data = JSON.parse(localStorage.getItem("etudiants")) || [];
+
+  let tbody = document.getElementById("tbody");
+  tbody.innerHTML = "";
+
+  data.forEach(e => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${e.sexe}</td>
+        <td>${e.age}</td>
+        <td>${e.filiere}</td>
+        <td>${e.heures}</td>
+        <td>${e.internet}</td>
+      </tr>
+    `;
+  });
+}
+
+window.onload = afficher;
+
+</script>
+
+</body>
+</html>

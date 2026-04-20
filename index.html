@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>StudentLife | Formulaire</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: white;
+}
+
+.container {
+  background: rgba(255,255,255,0.08);
+  padding: 25px;
+  border-radius: 15px;
+  width: 380px;
+  text-align: center;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.submit { background:#2563eb; color:white; }
+.reset { background:#ef4444; color:white; }
+
+a {
+  color: white;
+  display:block;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>StudentLife</h2>
+
+<form id="form">
+
+<input type="number" id="age" placeholder="Âge" required>
+
+<select id="sexe" required>
+<option value="">Sexe</option>
+<option>Homme</option>
+<option>Femme</option>
+</select>
+
+<input type="text" id="filiere" placeholder="Filière" required>
+
+<input type="number" id="heures" placeholder="Heures d'étude" required>
+
+<select id="internet" required>
+<option value="">Internet ?</option>
+<option>Oui</option>
+<option>Non</option>
+</select>
+
+<button type="submit" class="submit">Envoyer</button>
+<button type="button" class="reset" onclick="resetData()"> Vider les données</button>
+
+</form>
+
+<a href="data.html"> Voir les données</a>
+<a href="stats.html"> Voir les statistiques</a>
+
+</div>
+
+<script>
+
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let data = {
+    age: age.value,
+    sexe: sexe.value,
+    filiere: filiere.value,
+    heures: heures.value,
+    internet: internet.value
+  };
+
+  let old = JSON.parse(localStorage.getItem("etudiants")) || [];
+  old.push(data);
+
+  localStorage.setItem("etudiants", JSON.stringify(old));
+
+  this.reset();
+  alert("Données ajoutées !");
+});
+
+function resetData(){
+  localStorage.removeItem("etudiants");
+  alert("Données supprimées !");
+}
+
+</script>
+
+</body>
+</html>
