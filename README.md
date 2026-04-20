@@ -1,4 +1,4 @@
-📊 StudLife - Application de collecte et d’analyse de données
+ StudLife - Application de collecte et d’analyse de données
 
 ##  Présentation
 StudLife est une application web développée dans le cadre d’un TP académique (INF232).  
