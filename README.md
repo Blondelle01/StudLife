@@ -1,4 +1,14 @@
  StudLife - Application de collecte et d’analyse de données
+ 
+## Informations personnelles
+- Nom : KENMOGNE KAMTO   
+- Prénom : BLONDELLE PATRITIA 
+- Matricule : 23U2608
+- Filière : Informatique  
+- Niveau : 2 
+- Année académique : 2025-2026
+
+---
 
 ##  Présentation
 StudLife est une application web développée dans le cadre d’un TP académique (INF232).  
